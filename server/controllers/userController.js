@@ -32,7 +32,7 @@ exports.newUser = TryCatch(async (req, res, next) => {
         avatar,
     })
 
-    sendToken(res, user, 201, 'User Created')
+    sendToken(res, user, 201, 'Account Created')
 })
 
 //Login user and save token in cookie

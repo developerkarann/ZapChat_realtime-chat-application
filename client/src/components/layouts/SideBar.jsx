@@ -73,16 +73,14 @@ const SideBar = ({ user }) => {
                 </div>
 
 
-                <div className={`flex flex-col flex-1 ${isExpanded? " " : 'py-4'} px-1 space-y-4  text-xl ${isExpanded ? 'space-y-4' : 'space-y-10'}`}>
+                <div className={`flex flex-col flex-1 ${isExpanded ? " " : 'py-4'} px-1 space-y-4  text-xl ${isExpanded ? 'space-y-4' : 'space-y-10'}`}>
                     {
                         isExpanded &&
                         <>
-                            <div className="flex items-center flex-col   " style={{ backgroundColor: activeColor }} >
+                            <div className="flex items-center flex-col  p-4 " style={{ backgroundColor: activeColor }} >
                                 <img src={user?.avatar.url} alt="User profile" className="w-12 h-12 rounded-full mr-4  " />
                                 <h1 className="text-xl font-bold">{user?.name}</h1>
                                 <p className=" text-xs text-slate-200">{user?.username}</p>
-                    <img src="./assest/zapchat.png" alt="" />
-
                             </div>
 
                             <div className="flex flex-col px-2 " style={{ backgroundColor: activeColor }} >

@@ -12,7 +12,7 @@ const Login = lazy(() => import('./pages/authentication/Login'))
 const Chat = lazy(() => import('./pages/chat/Chat'))
 const Groups = lazy(() => import('./pages/groups/Groups'))
 const NotFound = lazy(() => import('./pages/notFound/NotFound'))
-
+const Account = lazy(()=> import('./pages/authentication/Account'))
 const AdminLogin = lazy(() => import('./pages/Admin/AdminLogin'))
 const Dashboard = lazy(() => import('./pages/Admin/Dashboard'))
 const UserManagement = lazy(() => import('./pages/Admin/UserManagement'))
@@ -46,7 +46,7 @@ function App() {
               <Route path="/chat/:chatId" element={<Chat />} />
               <Route path="/groups" element={<Groups />} />
             </Route>
-            <Route path="/login" element={<ProtectRoute user={!user} redirect="/" > <Login /> </ProtectRoute>} />
+            <Route path="/login" element={<ProtectRoute user={!user} redirect="/" > <Account /> </ProtectRoute>} />
             <Route path='/admin' element={<AdminLogin />} />
             <Route path='/admin/dashboard' element={<Dashboard />} />
             <Route path='/admin/users' element={<UserManagement />} />

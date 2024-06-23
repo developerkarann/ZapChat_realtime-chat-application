@@ -209,71 +209,76 @@ const Chat = ({ chatId, user, onlineUsers, chats }) => {
 
   return chatDetails.isLoading ? <Skeleton /> : (
     <>
-    <Title title={`CHatting with ${currentUser && currentUser[0]?.name}`} />
-      {/* Header */}
-      <div className="flex items-center justify-between px-8 p-2 w-full  shadow-2xl" style={{ backgroundColor: 'white', borderBottom: '1px solid #eeeeee' }}>
-        <button className="text-white" onClick={() => navigate('/')}>
-          <FaArrowLeft size={20} color={activeColor} />
-        </button>
-        <div className="flex items-center space-x-2">
-          <div className=" flex flex-col items-center text-black">
-            <h2 className=" text-xl font-semibold">{currentUser && currentUser[0]?.name}</h2>
-            <p className=" text-xs  text-green-500 ">{userTyping && 'Typing'}</p>
+      <div className="chatContainer h-screen">
+
+
+        <Title title={`Chatting with ${currentUser && currentUser[0]?.name}`} />
+        {/* Header */}
+        <div className="flex items-center justify-between px-8 p-2 w-full  shadow-2xl" style={{ backgroundColor: 'white', borderBottom: '1px solid #eeeeee' }}>
+          <button className="text-white" onClick={() => navigate('/')}>
+            <FaArrowLeft size={20} color={activeColor} />
+          </button>
+          <div className="flex items-center space-x-2">
+            <div className=" flex flex-col items-center text-black">
+              <h2 className=" text-xl font-semibold">{currentUser && currentUser[0]?.name}</h2>
+              <p className=" text-xs  text-green-500 ">{userTyping && 'Typing'}</p>
+            </div>
           </div>
+          <div className="relative">
+            <img
+              src={currentUser && currentUser[0]?.avatar}
+              alt="Profile"
+              className="w-10 h-10 rounded-full"
+            />
+          </div>
+
         </div>
-        <div className="relative">
-          <img
-            src={currentUser && currentUser[0]?.avatar}
-            alt="Profile"
-            className="w-10 h-10 rounded-full"
-          />
+
+        <div className='p-4 messageContainer overflow-y-auto flex flex-col' ref={containerRef} style={{ borderBottom: '1px solid #eeeeee' }} >
+          {
+            allMessages.map((i, n) => (
+              <MessageComponent message={i} user={user} key={n} />
+            ))
+          }
+
+          {userTyping && <TypingLoader />}
+
+          <div ref={bottomRef} />
         </div>
+
+
+        <form className='messageForm mt-1 ' onSubmit={submitHandler} >
+
+          <Stack direction={'row'} height={'100%'} padding={'0.5rem'} alignItems={'center'} position={'relative'}>
+            <IconButton
+              sx={{
+                position: 'absolute',
+                left: '1.5rem',
+                rotate: '30deg',
+              }} onClick={handleFileOpen} >
+              <AttachFileIcon o />
+            </IconButton>
+
+            <input className='border-none outline-none placeholder-gray-500 w-full  px-14 py-2 rounded-xl ' placeholder='Type a message...'
+              style={{ backgroundColor: '#eeeeee' }}
+              value={message} onChange={messageOnChange} />
+
+            <IconButton type='submit' sx={{
+              rotate: '-30deg',
+              backgroundColor: activeColor,
+              color: 'white',
+              marginLeft: '1rem',
+              padding: '0.5rem',
+              "&:hover": { bgcolor: activeColor }
+            }}>
+              <SendIcon />
+            </IconButton>
+          </Stack>
+        </form>
+
+        <FileMenu ancherE1={fileMenuAnchor} chatId={chatId} />
 
       </div>
-
-      <div className=' p-4 messageContainer flex flex-col' ref={containerRef} style={{ borderBottom: '1px solid #eeeeee' }} >
-        {
-          allMessages.map((i, n) => (
-            <MessageComponent message={i} user={user} key={n} />
-          ))
-        }
-
-        {userTyping && <TypingLoader />}
-
-        <div ref={bottomRef} />
-      </div>
-
-
-      <form className='messageForm mt-1 ' onSubmit={submitHandler} >
-
-        <Stack direction={'row'} height={'100%'} padding={'0.5rem'} alignItems={'center'} position={'relative'}>
-          <IconButton
-            sx={{
-              position: 'absolute',
-              left: '1.5rem',
-              rotate: '30deg',
-            }} onClick={handleFileOpen} >
-            <AttachFileIcon o />
-          </IconButton>
-
-          <input className='border-none outline-none placeholder-gray-500 w-full  px-14 py-2 rounded-xl ' placeholder='Type a message...'
-            style={{ backgroundColor: '#eeeeee' }}
-            value={message} onChange={messageOnChange} />
-
-          <IconButton type='submit' sx={{
-            rotate: '-30deg',
-            backgroundColor: activeColor,
-            color: 'white',
-            marginLeft: '1rem',
-            padding: '0.5rem',
-            "&:hover": { bgcolor: activeColor }
-          }}>
-            <SendIcon />
-          </IconButton>
-        </Stack>
-      </form>
-
-      <FileMenu ancherE1={fileMenuAnchor} chatId={chatId} />
     </>
   )
 }
