@@ -1,26 +1,23 @@
-import React, { useCallback, useRef, useState } from 'react'
-import AppLaylout from '../../components/layouts/AppLaylout'
-import { IconButton, Skeleton, Stack } from '@mui/material'
-import { AttachFile as AttachFileIcon, Send as SendIcon } from '@mui/icons-material'
-import { InputBox } from '../../components/styles/StyledComponents'
-import { activeColor, grayColor, orange, richBlackColor1, richBlackColor2, richBlackColor5 } from '../../constants/color'
-import FileMenu from '../../components/dialogs/FileMenu'
-import MessageComponent from '../../components/shared/MessageComponent'
-import { sampleMessage } from '../../constants/sampleData'
-import { useErrors, useSocket, useSocketEvents } from '../../hooks/hook'
-import { ALERT, CHAT_JOINED, CHAT_LEAVED, NEW_MESSAGE, NEW_MESSAGE_ALERT, NEW_REQUEST, REFETCH_CHATS, START_TYPING, STOP_TYPING } from '../../constants/events'
-import { useChatDetailsQuery, useGetOldMessagesQuery, useMyChatsQuery } from '../../redux/api/api'
-import { useEffect } from 'react'
 import { useInfiniteScrollTop } from '6pp'
+import { AttachFile as AttachFileIcon, Send as SendIcon } from '@mui/icons-material'
+import { IconButton, Skeleton, Stack } from '@mui/material'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { FaArrowLeft } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-import { setIsFileMenu } from '../../redux/reducers/misc'
-import { incrementNotification, removeNewMessagesAlert, setNewMessagesAlert } from '../../redux/reducers/chat'
-import { getOrSaveFromLocalStorage } from '../../lib/features'
-import { TypingLoader } from '../../components/layouts/Loaders'
 import { useNavigate } from 'react-router-dom'
-import { FaArrowLeft, FaEllipsisV, FaTrashAlt, FaUserSlash, FaPaperPlane } from 'react-icons/fa';
-import './chat.css'
+import FileMenu from '../../components/dialogs/FileMenu'
+import AppLaylout from '../../components/layouts/AppLaylout'
+import { TypingLoader } from '../../components/layouts/Loaders'
+import MessageComponent from '../../components/shared/MessageComponent'
 import Title from '../../components/shared/Title'
+import { activeColor } from '../../constants/color'
+import { ALERT, CHAT_JOINED, CHAT_LEAVED, NEW_MESSAGE, NEW_MESSAGE_ALERT, REFETCH_CHATS, START_TYPING, STOP_TYPING } from '../../constants/events'
+import { useErrors, useSocket, useSocketEvents } from '../../hooks/hook'
+import { getOrSaveFromLocalStorage } from '../../lib/features'
+import { useChatDetailsQuery, useGetOldMessagesQuery, useMyChatsQuery } from '../../redux/api/api'
+import { incrementNotification, removeNewMessagesAlert, setNewMessagesAlert } from '../../redux/reducers/chat'
+import { setIsFileMenu } from '../../redux/reducers/misc'
+import './chat.css'
 
 
 const Chat = ({ chatId, user, onlineUsers, chats }) => {
@@ -41,8 +38,6 @@ const Chat = ({ chatId, user, onlineUsers, chats }) => {
   const [isOnline, setIsOnline] = useState(false)
 
   const typingTimeOut = useRef(null)
-
-  const [showMenu, setShowMenu] = useState(false);
 
   const chatDetails = useChatDetailsQuery({ chatId, skip: !chatId })
 

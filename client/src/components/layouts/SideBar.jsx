@@ -14,6 +14,8 @@ import NotificationsDialog from '../specific/Notifications';
 import SearchDialog from '../specific/Search';
 import { server } from '../../constants/config';
 import { userNotExits } from '../../redux/reducers/auth'
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 
 const SideBar = ({ user }) => {
 
@@ -61,23 +63,40 @@ const SideBar = ({ user }) => {
     }, [isOpenSidebar])
 
 
+
+    // const driverObj = driver({
+    //     // showProgress: true,
+    //     steps: [
+    //         { element: '.addFriend', popover: { title: 'Add Friends', description: 'Here you can search user and send them connection request to add them in your chat list.' } },
+    //         { element: '.notification', popover: { title: 'Notifications', description: 'Here are your notifications. You can see your connection request here.' } },
+    //         { element: '.createGroup', popover: { title: 'Create your group', description: 'Here you can simply create your own group', } },
+    //         { element: '.myGroups', popover: { title: 'Groups', description: 'In this section you can see your all groups and can operation such as rename group, add users and remove user etc.' } },
+    //         { element: '.Menu', popover: { title: 'Expend Menu', description: 'This tab will expend your menu section and will show you more details',  } },
+    //         { element: '.logOut', popover: { title: 'Logout', description: 'This is logout tab by clicking it you will be logged out',  } },
+    //         { popover: { title: 'Enjoy Your Realtime Chatting', description: 'And that is all, go ahead and start making friend and chatting with them.' } }
+    //     ]
+    // });
+
+    // driverObj.drive();
+
+
     return (
         <>
-            <div className={` sidebarContainer flex flex-col ${isExpanded ? isOpenSidebar ? 'w-full' : 'w-48' : 'w-12'} 
+            <div className={` sidebarContainer flex flex-col ${isExpanded ? isOpenSidebar ? 'w-full' : 'w-52' : 'w-15'} 
              h-screen ${isOpenSidebar ? 'max-md:absolute' : 'max-md:hidden'} z-20 text-white transition-all duration-300`}
                 style={{ backgroundColor: activeColor, }} >
 
-                <div className="flex items-center ml-3 py-4 text-xl max-md:hidden" >
+                <div className=" Menu flex items-center ml-3 py-4 text-xl max-md:hidden" >
                     {/* <img src="./assest/zapchat.png" alt="" /> */}
                     <FontAwesomeIcon icon={faBars} className="cursor-pointer" onClick={() => setIsExpanded(!isExpanded)} />
                 </div>
 
 
-                <div className={`flex flex-col flex-1 ${isExpanded ? " " : 'py-4'} px-1 space-y-4  text-xl ${isExpanded ? 'space-y-4' : 'space-y-10'}`}>
+                <div className={` flex flex-col flex-1 ${isExpanded ? " " : 'py-4'} px-1 space-y-4  text-xl ${isExpanded ? 'space-y-4' : 'space-y-10'}`}>
                     {
                         isExpanded &&
                         <>
-                            <div className="flex items-center flex-col  p-4 " style={{ backgroundColor: activeColor }} >
+                            <div className="flex items-center flex-col max-md:p-4 " style={{ backgroundColor: activeColor }} >
                                 <img src={user?.avatar.url} alt="User profile" className="w-12 h-12 rounded-full mr-4  " />
                                 <h1 className="text-xl font-bold">{user?.name}</h1>
                                 <p className=" text-xs text-slate-200">{user?.username}</p>
@@ -93,7 +112,7 @@ const SideBar = ({ user }) => {
 
                     }
 
-                    <div className="flex shadow-md items-center space-x-2 cursor-pointer hover:bg-sky-600 p-2 rounded"
+                    <div className=" notification flex shadow-md items-center space-x-2 cursor-pointer hover:bg-sky-600 p-2 rounded"
                         onClick={openNotificationDialog}>
                         <FontAwesomeIcon icon={faBell} />
                         <p className='text-lg'>
@@ -102,7 +121,7 @@ const SideBar = ({ user }) => {
                     </div>
 
 
-                    <div className="flex shadow-md items-center space-x-2 cursor-pointer hover:bg-sky-600 p-2 rounded"
+                    <div className=" addFriend flex shadow-md items-center space-x-2 cursor-pointer hover:bg-sky-600 p-2 rounded"
                         onClick={openSearh}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                         <p className='text-lg'>
@@ -110,7 +129,7 @@ const SideBar = ({ user }) => {
                         </p>
                     </div>
 
-                    <div className="flex shadow-md items-center space-x-2 cursor-pointer hover:bg-sky-600 p-2 rounded"
+                    <div className=" myGroups flex shadow-md items-center space-x-2 cursor-pointer hover:bg-sky-600 p-2 rounded"
                         onClick={navigateToGroup}>
                         <FontAwesomeIcon icon={faUserGroup} />
                         <p className='text-lg'>
@@ -118,7 +137,7 @@ const SideBar = ({ user }) => {
                         </p>
                     </div>
 
-                    <div className="flex shadow-md items-center space-x-2 cursor-pointer hover:bg-sky-600 p-2 rounded"
+                    <div className=" createGroup flex shadow-md items-center space-x-2 cursor-pointer hover:bg-sky-600 p-2 rounded"
                         onClick={openNewGroup}>
                         <FontAwesomeIcon icon={faPlus} />
                         <p className='text-lg'>
@@ -128,7 +147,7 @@ const SideBar = ({ user }) => {
 
                     <hr />
 
-                    <div className="flex shadow-md items-center space-x-2 cursor-pointer hover:bg-sky-600 p-2 rounded"
+                    <div className=" logOut flex shadow-md items-center space-x-2 cursor-pointer hover:bg-sky-600 p-2 rounded"
                         onClick={logoutHandler}>
                         <FontAwesomeIcon icon={faSignOutAlt} />
                         <p className=' text-lg'>

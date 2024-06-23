@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { LayoutLoader } from "../../components/layouts/Loaders";
 import AvatarCard from '../../components/shared/AvatarCard';
+import Title from '../../components/shared/Title';
 import UserItem from '../../components/shared/UserItem';
 import NewGroupDialog from '../../components/specific/NewGroupDialog';
 import { Link } from '../../components/styles/StyledComponents';
@@ -14,7 +15,6 @@ import { activeColor, mateBlack, sideBarBgColor } from '../../constants/color';
 import { useAsyncMutation, useErrors } from '../../hooks/hook';
 import { useChatDetailsQuery, useDeleteChatMutation, useMyGroupsQuery, useRemoveGroupMemberMutation, useRenameGroupMutation } from '../../redux/api/api';
 import { setIsAddMember, setIsNewGroup } from '../../redux/reducers/misc';
-import Title from '../../components/shared/Title';
 
 const DeleteDialog = lazy(() => import('../../components/dialogs/ConfirmDeleteDialog'))
 const AddMemberDialog = lazy(() => import('../../components/dialogs/AddMemberDialog'))
@@ -183,7 +183,7 @@ export default function Groups() {
 
   return myGroups.isLoading ? <LayoutLoader /> : (
     <>
-        <Title title='ZapChat - My Groups' />
+      <Title title='ZapChat - My Groups' />
 
       {/* Left Container  */}
       <Grid container height={'100vh'}>
@@ -283,8 +283,8 @@ export default function Groups() {
           <div className={`flex flex-col  w-full  h-full text-white transition-all duration-300 max-md:w-full`} style={{ backgroundColor: sideBarBgColor, borderRight: '#eeeeee' }} >
             <div className="flex items-center p-2 justify-between " style={{ backgroundColor: activeColor }} >
               <div className="flex items-center ">
-                <img src={user?.data?.avatar.url} alt="User profile" className="w-12 h-12 rounded-full mr-4 " />
-                <h1 className="text-xl font-bold">{user?.data?.name}</h1>
+                <img src={user?.avatar.url} alt="User profile" className="w-12 h-12 rounded-full mr-4 " />
+                <h1 className="text-xl font-bold">{user?.name}</h1>
               </div>
             </div>
 
@@ -305,12 +305,18 @@ export default function Groups() {
             <div className="flex-1 overflow-y-auto ">
 
               {
-                filteredChatItems?.map((group, index) => {
-                  return (
-                    <GroupListItem group={group} chatId={chatId} key={group._id} />
-                  )
+                filteredChatItems.length === 0 ? <>
+                  <div className="flex flex-col items-center justify-center text-center h-full">
+                    <h1 className='text-white mb-5 text-lg'>Please create a group</h1>
+                    <img onClick={openNewGroup} className=' w-72 hover:cursor-pointer' src="./assest/add_friend2.png" alt="" />
+                  </div>
+                </> :
+                  filteredChatItems?.map((group, index) => {
+                    return (
+                      <GroupListItem group={group} chatId={chatId} key={group._id} />
+                    )
 
-                })
+                  })
 
               }
             </div>

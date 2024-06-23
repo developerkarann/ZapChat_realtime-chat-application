@@ -11,7 +11,7 @@
 }
 @media screen and (max-width: 768px) {
     .messageContainer{
-        height: 84%;
+        height: 80%;
     }
     .messageForm{
         height: 5%;
