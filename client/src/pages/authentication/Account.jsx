@@ -136,7 +136,7 @@ export default function account() {
 
     return (
         <>
-            <Title title='ZapCHat - Authentication' />
+            <Title title='ZappiChat - Authentication' />
             <div className={`account`} id="account" style={{ backgroundColor: sideBarBgColor }}>
                 <div className="container" id="container">
                     <div className="form-container sign-up-container">
@@ -166,11 +166,11 @@ export default function account() {
                     </div>
                     <div className="form-container sign-in-container">
                         <form onSubmit={handleLogin}>
-                            <img className=' w-24' src='./assest/zapchat.png' alt="Zapchat"
+                            <img className=' w-24' src='./assest/zapchat.png' alt="ZapppiChat"
                             />
                             {/* <h1>Sign in</h1> */}
                             <p>
-                                Please login to get access ZapChat Realtime chatting Application
+                                Please login to get access ZappiChat Realtime chatting Application
                             </p>
                             <input value={username.value} onChange={username.changeHandler} type="text" placeholder="Username" autoComplete="off" />
                             <input value={password.value} onChange={password.changeHandler} type="password" placeholder="Password" name="password" autoComplete="off" />

@@ -183,7 +183,7 @@ export default function Groups() {
 
   return myGroups.isLoading ? <LayoutLoader /> : (
     <>
-      <Title title='ZapChat - My Groups' />
+      <Title title='ZappiChat - My Groups' />
 
       {/* Left Container  */}
       <Grid container height={'100vh'}>
