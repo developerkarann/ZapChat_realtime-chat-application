@@ -14,6 +14,7 @@ import { Navigate, useLocation } from 'react-router-dom'
 import { grayColor, mateBlack } from '../../constants/color'
 import { adminLogout } from '../../redux/thunks/admin'
 import { Link } from '../styles/StyledComponents'
+import Title from '../shared/Title'
 
 
 const Sidebar = ({ w = '100%' }) => {
@@ -53,6 +54,7 @@ const Sidebar = ({ w = '100%' }) => {
 
     return (
         <>
+                <Title title='ZapChat - Admin' />
             <Stack direction={'column'} p={'3rem'} spacing={'3rem'} width={w}>
                 <Typography variant='h4' textTransform={'uppercase'}> Admin </Typography>
 

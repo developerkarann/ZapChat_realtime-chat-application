@@ -89,7 +89,7 @@ const AppLaylout = () => (WrappedComponent) => {
 
         return (
             <>
-                <Title title='ZappiChat - Home' />
+                <Title title='ZapChat - Home' />
                 {/* <Header /> */}
                 <DeleteChatMenuDialog dispatch={dispatch} deleteMenuAnchor={deleteMenuAnchor.current} />
                 {
